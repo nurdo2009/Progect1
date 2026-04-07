@@ -46,7 +46,7 @@ export default function Home() {
       </main>
 
       <footer className="app-footer">
-        <p>© 2024 Трекер расходов. Сделано с ❤️</p>
+        <p>© 2026 Трекер расходов. Сделано с ❤️</p>
       </footer>
     </div>
   );
