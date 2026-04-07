@@ -1,0 +1,41 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-main {
+  flex: 1;
+  padding: 2rem 0;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Mobile First Responsive */
+@media (max-width: 768px) {
+  .app-main {
+    padding: 1.5rem 0;
+  }
+
+  .container {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-main {
+    padding: 1rem 0;
+  }
+
+  .container {
+    gap: 1rem;
+    padding: 0 0.5rem;
+  }
+}

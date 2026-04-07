@@ -1,0 +1,145 @@
+.expense-form-container {
+  background-color: var(--bg-white);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  animation: slideDown 0.4s ease-out;
+}
+
+.expense-form-container h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+.expense-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 500;
+  color: var(--text-dark);
+  font-size: 0.9rem;
+  text-transform: capitalize;
+}
+
+.form-group input,
+.form-group select {
+  padding: 0.75rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+}
+
+/* Error Message */
+.error-message {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  border-left: 4px solid #c62828;
+  animation: shake 0.3s ease-in-out;
+}
+
+/* Submit Button */
+.btn-submit {
+  background: linear-gradient(135deg, var(--primary-color) 0%, #1976D2 100%);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-submit:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Responsive Grid */
+@media (min-width: 768px) {
+  .expense-form {
+    grid-template-columns: 1fr 1fr 1fr auto;
+    align-items: flex-end;
+    gap: 1rem;
+  }
+
+  .form-group:last-child {
+    grid-column: span 1;
+  }
+
+  .btn-submit {
+    height: 40px;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .expense-form {
+    grid-template-columns: 1fr;
+  }
+
+  .expense-form-container {
+    padding: 1rem;
+  }
+
+  .btn-submit {
+    width: 100%;
+  }
+}
+
+/* Animations */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}

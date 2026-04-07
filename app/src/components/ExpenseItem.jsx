@@ -1,0 +1,64 @@
+import { deleteDoc, doc } from 'firebase/firestore';
+import { db } from '../firebase/firebase';
+import '../styles/ExpenseItem.css';
+
+const CATEGORY_ICONS = {
+  food: '🍕',
+  transport: '🚗',
+  other: '📌',
+};
+
+const CATEGORY_COLORS = {
+  food: '#4CAF50',    // зеленый
+  transport: '#2196F3', // синий
+  other: '#9C27B0',   // фиолетовый
+};
+
+export default function ExpenseItem({ expense }) {
+  const handleDelete = async () => {
+    if (window.confirm('Вы уверены, что хотите удалить этот расход?')) {
+      try {
+        await deleteDoc(doc(db, 'expenses', expense.id));
+      } catch (err) {
+        alert('Ошибка при удалении: ' + err.message);
+      }
+    }
+  };
+
+  // Преобразование Timestamp → Date
+  const formatDate = (timestamp) => {
+    if (!timestamp) return 'Нет даты';
+    const date = timestamp.toDate?.() || new Date(timestamp);
+    return date.toLocaleDateString('ru-RU', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+    });
+  };
+
+  return (
+    <div
+      className="expense-item"
+      style={{ borderLeftColor: CATEGORY_COLORS[expense.category] }}
+    >
+      <div className="expense-icon">
+        {CATEGORY_ICONS[expense.category] || '📌'}
+      </div>
+
+      <div className="expense-details">
+        <h4 className="expense-title">{expense.title}</h4>
+        <p className="expense-date">{formatDate(expense.createdAt)}</p>
+      </div>
+
+      <div className="expense-amount">${expense.amount.toFixed(2)}</div>
+
+      <button
+        className="btn-delete"
+        onClick={handleDelete}
+        title="Удалить расход"
+      >
+        ✕
+      </button>
+    </div>
+  );
+}
