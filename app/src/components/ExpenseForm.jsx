@@ -3,7 +3,7 @@ import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 import '../styles/ExpenseForm.css';
 
-export default function ExpenseForm() {
+export default function ExpenseForm({ currency = 'USD' }) {
   const [title, setTitle] = useState('');
   const [amount, setAmount] = useState('');
   const [category, setCategory] = useState('food');
@@ -65,7 +65,7 @@ export default function ExpenseForm() {
         </div>
 
         <div className="form-group">
-          <label htmlFor="amount">Сумма ($)</label>
+          <label htmlFor="amount">Сумма ({currency})</label>
           <input
             id="amount"
             type="number"

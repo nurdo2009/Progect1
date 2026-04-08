@@ -8,7 +8,14 @@ import {
 import { db } from '../firebase/firebase';
 import '../styles/Summary.css';
 
-export default function Summary({ selectedCategory, selectedMonth }) {
+const CURRENCY_SYMBOLS = {
+  USD: '$',
+  RUB: '₽',
+  KGS: 'сом',
+  TRY: '₺',
+};
+
+export default function Summary({ selectedCategory, selectedMonth, currency = 'USD' }) {
   const [totalAmount, setTotalAmount] = useState(0);
   const [filteredAmount, setFilteredAmount] = useState(0);
   const [expenseCount, setExpenseCount] = useState(0);
@@ -60,7 +67,7 @@ export default function Summary({ selectedCategory, selectedMonth }) {
     <div className="summary">
       <div className="summary-card total">
         <h3>Всего расходов</h3>
-        <p className="amount">${totalAmount.toFixed(2)}</p>
+        <p className="amount">{CURRENCY_SYMBOLS[currency]}{totalAmount.toFixed(2)}</p>
       </div>
 
       <div className="summary-card filtered">
@@ -72,14 +79,14 @@ export default function Summary({ selectedCategory, selectedMonth }) {
               })
             : 'Отфильтровано'}
         </h3>
-        <p className="amount">${filteredAmount.toFixed(2)}</p>
+        <p className="amount">{CURRENCY_SYMBOLS[currency]}{filteredAmount.toFixed(2)}</p>
         <span className="count">{expenseCount} позиций</span>
       </div>
 
       <div className="summary-card average">
         <h3>Средняя стоимость</h3>
         <p className="amount">
-          ${expenseCount > 0 ? (filteredAmount / expenseCount).toFixed(2) : '0.00'}
+          {CURRENCY_SYMBOLS[currency]}{expenseCount > 0 ? (filteredAmount / expenseCount).toFixed(2) : '0.00'}
         </p>
       </div>
     </div>

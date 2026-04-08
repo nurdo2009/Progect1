@@ -14,7 +14,14 @@ const CATEGORY_COLORS = {
   other: '#9C27B0',   // фиолетовый
 };
 
-export default function ExpenseItem({ expense }) {
+const CURRENCY_SYMBOLS = {
+  USD: '$',
+  RUB: '₽',
+  KGS: 'сом',
+  TRY: '₺',
+};
+
+export default function ExpenseItem({ expense, currency = 'USD' }) {
   const handleDelete = async () => {
     if (window.confirm('Вы уверены, что хотите удалить этот расход?')) {
       try {
@@ -50,7 +57,7 @@ export default function ExpenseItem({ expense }) {
         <p className="expense-date">{formatDate(expense.createdAt)}</p>
       </div>
 
-      <div className="expense-amount">${expense.amount.toFixed(2)}</div>
+      <div className="expense-amount">{CURRENCY_SYMBOLS[currency]}{expense.amount.toFixed(2)}</div>
 
       <button
         className="btn-delete"

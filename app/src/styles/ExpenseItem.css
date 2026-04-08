@@ -3,17 +3,18 @@
   align-items: center;
   gap: 1rem;
   padding: 1rem 1.25rem;
-  background-color: var(--bg-light);
+  background-color: var(--bg-white);
   border-radius: 8px;
   border-left: 4px solid;
   transition: var(--transition);
   animation: slideIn 0.3s ease-out;
   cursor: default;
+  box-shadow: var(--shadow-sm);
 }
 
 .expense-item:hover {
-  background-color: #f0f0f0;
-  box-shadow: var(--shadow-sm);
+  background-color: var(--bg-light);
+  box-shadow: var(--shadow-md);
   transform: translateX(4px);
 }
 
@@ -23,6 +24,7 @@
   min-width: 2rem;
   text-align: center;
   opacity: 0.8;
+  animation: scaleIn 0.3s ease-out;
 }
 
 /* Expense Details */
@@ -73,8 +75,9 @@
 }
 
 .btn-delete:hover {
-  background-color: #ffebee;
+  background-color: rgba(198, 40, 40, 0.1);
   color: #c62828;
+  transform: scale(1.1);
 }
 
 .btn-delete:active {
@@ -104,15 +107,26 @@
   }
 }
 
-/* Responsive Design */
-@media (max-width: 480px) {
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive Design - Tablet */
+@media (max-width: 768px) {
   .expense-item {
-    padding: 0.75rem;
-    gap: 0.75rem;
+    padding: 0.9rem 1rem;
+    gap: 0.9rem;
   }
 
   .expense-icon {
-    font-size: 1.25rem;
+    font-size: 1.3rem;
   }
 
   .expense-title {
@@ -121,12 +135,59 @@
 
   .expense-amount {
     font-size: 1rem;
-    min-width: 60px;
+    min-width: 65px;
+  }
+}
+
+/* Responsive Design - Mobile */
+@media (max-width: 480px) {
+  .expense-item {
+    padding: 0.75rem;
+    gap: 0.75rem;
+  }
+
+  .expense-icon {
+    font-size: 1.25rem;
+    min-width: 1.75rem;
+  }
+
+  .expense-title {
+    font-size: 0.9rem;
+  }
+
+  .expense-date {
+    font-size: 0.75rem;
+  }
+
+  .expense-amount {
+    font-size: 0.95rem;
+    min-width: 55px;
   }
 
   .btn-delete {
     width: 28px;
     height: 28px;
     font-size: 0.95rem;
+  }
+}
+
+/* Extra Small Mobile */
+@media (max-width: 360px) {
+  .expense-item {
+    padding: 0.6rem;
+    gap: 0.6rem;
+  }
+
+  .expense-icon {
+    font-size: 1.1rem;
+  }
+
+  .expense-title {
+    font-size: 0.85rem;
+  }
+
+  .expense-amount {
+    font-size: 0.85rem;
+    min-width: 50px;
   }
 }

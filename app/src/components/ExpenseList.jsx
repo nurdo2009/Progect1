@@ -9,7 +9,7 @@ import { db } from '../firebase/firebase';
 import ExpenseItem from './ExpenseItem';
 import '../styles/ExpenseList.css';
 
-export default function ExpenseList({ selectedCategory, selectedMonth }) {
+export default function ExpenseList({ selectedCategory, selectedMonth, currency = 'USD' }) {
   const [expenses, setExpenses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -91,7 +91,7 @@ export default function ExpenseList({ selectedCategory, selectedMonth }) {
       <h2>Расходы</h2>
       <div className="expenses-container">
         {expenses.map((expense) => (
-          <ExpenseItem key={expense.id} expense={expense} />
+          <ExpenseItem key={expense.id} expense={expense} currency={currency} />
         ))}
       </div>
     </div>

@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.25rem;
-  animation: fadeIn 0.5s ease-out;
+  animation: fadeIn 0.6s ease-out;
 }
 
 .summary-card {
@@ -11,7 +11,8 @@
   padding: 1.5rem;
   box-shadow: var(--shadow-sm);
   transition: var(--transition);
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--border-color);
+  animation: scaleIn 0.5s ease-out backwards;
 }
 
 .summary-card:hover {
@@ -34,6 +35,7 @@
   color: var(--text-dark);
   margin: 0;
   line-height: 1;
+  word-break: break-word;
 }
 
 .summary-card .count {
@@ -47,6 +49,7 @@
 .summary-card.total {
   background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
   color: white;
+  border: none;
 }
 
 .summary-card.total h3 {
@@ -65,6 +68,7 @@
 .summary-card.filtered {
   background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
   color: white;
+  border: none;
 }
 
 .summary-card.filtered h3 {
@@ -83,6 +87,7 @@
 .summary-card.average {
   background: linear-gradient(135deg, #FF9800 0%, #E65100 100%);
   color: white;
+  border: none;
 }
 
 .summary-card.average h3 {
@@ -109,7 +114,33 @@
   }
 }
 
-/* Responsive */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Staggered animation on desktop */
+@media (min-width: 768px) {
+  .summary-card:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+
+  .summary-card:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .summary-card:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+}
+
+/* Tablet Responsive */
 @media (max-width: 768px) {
   .summary {
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -117,7 +148,7 @@
   }
 
   .summary-card {
-    padding: 1rem;
+    padding: 1.25rem;
   }
 
   .summary-card .amount {
@@ -126,20 +157,51 @@
 
   .summary-card h3 {
     font-size: 0.8rem;
+    margin-bottom: 0.5rem;
   }
 }
 
+/* Mobile Responsive */
 @media (max-width: 480px) {
   .summary {
     grid-template-columns: 1fr;
+    gap: 0.9rem;
+  }
+
+  .summary-card {
+    padding: 1.1rem;
+  }
+
+  .summary-card .amount {
+    font-size: 1.6rem;
+  }
+
+  .summary-card h3 {
+    font-size: 0.75rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .summary-card .count {
+    font-size: 0.75rem;
+    margin-top: 0.3rem;
+  }
+}
+
+/* Extra Small Mobile */
+@media (max-width: 360px) {
+  .summary {
     gap: 0.75rem;
   }
 
   .summary-card {
-    padding: 1rem;
+    padding: 0.9rem;
   }
 
   .summary-card .amount {
-    font-size: 1.75rem;
+    font-size: 1.4rem;
+  }
+
+  .summary-card h3 {
+    font-size: 0.7rem;
   }
 }
