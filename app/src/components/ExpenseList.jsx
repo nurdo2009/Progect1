@@ -7,7 +7,7 @@ import {
 } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
 import ExpenseItem from './ExpenseItem';
-import '../styles/ExpenseList.css';
+import styles from '../styles/ExpenseList.module.css';
 
 export default function ExpenseList({ selectedCategory, selectedMonth, currency = 'USD' }) {
   const [expenses, setExpenses] = useState([]);
@@ -69,17 +69,17 @@ export default function ExpenseList({ selectedCategory, selectedMonth, currency 
   }, [selectedCategory, selectedMonth]);
 
   if (loading) {
-    return <div className="loading">Загружаю расходы...</div>;
+    return <div className={styles.loading}>Загружаю расходы...</div>;
   }
 
   if (error) {
-    return <div className="error">Ошибка: {error}</div>;
+    return <div className={styles.error}>Ошибка: {error}</div>;
   }
 
   if (expenses.length === 0) {
     return (
-      <div className="empty-state">
-        <div className="empty-icon">📝</div>
+      <div className={styles['empty-state']}>
+        <div className={styles['empty-icon']}>📝</div>
         <h3>Расходов нет</h3>
         <p>Начните отслеживать свои расходы!</p>
       </div>
@@ -87,9 +87,9 @@ export default function ExpenseList({ selectedCategory, selectedMonth, currency 
   }
 
   return (
-    <div className="expense-list">
+    <div className={styles['expense-list']}>
       <h2>Расходы</h2>
-      <div className="expenses-container">
+      <div className={styles['expenses-container']}>
         {expenses.map((expense) => (
           <ExpenseItem key={expense.id} expense={expense} currency={currency} />
         ))}

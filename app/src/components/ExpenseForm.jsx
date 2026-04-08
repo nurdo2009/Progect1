@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
-import '../styles/ExpenseForm.css';
+import styles from '../styles/ExpenseForm.module.css';
 
 export default function ExpenseForm({ currency = 'USD' }) {
   const [title, setTitle] = useState('');
@@ -47,12 +47,12 @@ export default function ExpenseForm({ currency = 'USD' }) {
   };
 
   return (
-    <div className="expense-form-container">
+    <div className={styles['expense-form-container']}>
       <h2>Добавить расход</h2>
-      <form onSubmit={handleSubmit} className="expense-form">
-        {error && <div className="error-message">{error}</div>}
+      <form onSubmit={handleSubmit} className={styles['expense-form']}>
+        {error && <div className={styles['error-message']}>{error}</div>}
 
-        <div className="form-group">
+        <div className={styles['form-group']}>
           <label htmlFor="title">Название</label>
           <input
             id="title"
@@ -64,7 +64,7 @@ export default function ExpenseForm({ currency = 'USD' }) {
           />
         </div>
 
-        <div className="form-group">
+        <div className={styles['form-group']}>
           <label htmlFor="amount">Сумма ({currency})</label>
           <input
             id="amount"
@@ -78,7 +78,7 @@ export default function ExpenseForm({ currency = 'USD' }) {
           />
         </div>
 
-        <div className="form-group">
+        <div className={styles['form-group']}>
           <label htmlFor="category">Категория</label>
           <select
             id="category"
@@ -92,7 +92,7 @@ export default function ExpenseForm({ currency = 'USD' }) {
           </select>
         </div>
 
-        <button type="submit" className="btn-submit" disabled={loading}>
+        <button type="submit" className={styles['btn-submit']} disabled={loading}>
           {loading ? 'Добавляю...' : 'Добавить расход'}
         </button>
       </form>

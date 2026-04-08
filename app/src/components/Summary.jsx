@@ -6,7 +6,7 @@ import {
   onSnapshot,
 } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
-import '../styles/Summary.css';
+import styles from '../styles/Summary.module.css';
 
 const CURRENCY_SYMBOLS = {
   USD: '$',
@@ -64,13 +64,13 @@ export default function Summary({ selectedCategory, selectedMonth, currency = 'U
   }, [selectedCategory, selectedMonth]);
 
   return (
-    <div className="summary">
-      <div className="summary-card total">
+    <div className={styles.summary}>
+      <div className={`${styles['summary-card']} ${styles.total}`}>
         <h3>Всего расходов</h3>
-        <p className="amount">{CURRENCY_SYMBOLS[currency]}{totalAmount.toFixed(2)}</p>
+        <p className={styles.amount}>{CURRENCY_SYMBOLS[currency]}{totalAmount.toFixed(2)}</p>
       </div>
 
-      <div className="summary-card filtered">
+      <div className={`${styles['summary-card']} ${styles.filtered}`}>
         <h3>
           {selectedMonth
             ? new Date(selectedMonth + '-01').toLocaleDateString('ru-RU', {
@@ -79,13 +79,13 @@ export default function Summary({ selectedCategory, selectedMonth, currency = 'U
               })
             : 'Отфильтровано'}
         </h3>
-        <p className="amount">{CURRENCY_SYMBOLS[currency]}{filteredAmount.toFixed(2)}</p>
-        <span className="count">{expenseCount} позиций</span>
+        <p className={styles.amount}>{CURRENCY_SYMBOLS[currency]}{filteredAmount.toFixed(2)}</p>
+        <span className={styles.count}>{expenseCount} позиций</span>
       </div>
 
-      <div className="summary-card average">
+      <div className={`${styles['summary-card']} ${styles.average}`}>
         <h3>Средняя стоимость</h3>
-        <p className="amount">
+        <p className={styles.amount}>
           {CURRENCY_SYMBOLS[currency]}{expenseCount > 0 ? (filteredAmount / expenseCount).toFixed(2) : '0.00'}
         </p>
       </div>

@@ -1,4 +1,4 @@
-import '../styles/FilterBar.css';
+import styles from '../styles/FilterBar.module.css';
 
 export default function FilterBar({
   selectedCategory,
@@ -13,14 +13,14 @@ export default function FilterBar({
   };
 
   return (
-    <div className="filter-bar">
-      <div className="filter-group">
+    <div className={styles['filter-bar']}>
+      <div className={styles['filter-group']}>
         <label htmlFor="category-select">Категория</label>
         <select
           id="category-select"
           value={selectedCategory}
           onChange={(e) => onCategoryChange(e.target.value)}
-          className="filter-select"
+          className={styles['filter-select']}
         >
           <option value="all">Все категории</option>
           <option value="food">🍕 Еда</option>
@@ -29,20 +29,20 @@ export default function FilterBar({
         </select>
       </div>
 
-      <div className="filter-group">
+      <div className={styles['filter-group']}>
         <label htmlFor="month-select">Месяц</label>
         <input
           id="month-select"
           type="month"
           value={selectedMonth}
           onChange={(e) => onMonthChange(e.target.value)}
-          className="filter-input"
+          className={styles['filter-input']}
         />
       </div>
 
       {selectedMonth && (
         <button
-          className="btn-reset"
+          className={styles['btn-reset']}
           onClick={() => onMonthChange('')}
           title="Очистить фильтр месяца"
         >

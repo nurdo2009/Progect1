@@ -1,6 +1,6 @@
 import { deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../firebase/firebase';
-import '../styles/ExpenseItem.css';
+import styles from '../styles/ExpenseItem.module.css';
 
 const CATEGORY_ICONS = {
   food: '🍕',
@@ -45,22 +45,22 @@ export default function ExpenseItem({ expense, currency = 'USD' }) {
 
   return (
     <div
-      className="expense-item"
+      className={styles['expense-item']}
       style={{ borderLeftColor: CATEGORY_COLORS[expense.category] }}
     >
-      <div className="expense-icon">
+      <div className={styles['expense-icon']}>
         {CATEGORY_ICONS[expense.category] || '📌'}
       </div>
 
-      <div className="expense-details">
-        <h4 className="expense-title">{expense.title}</h4>
-        <p className="expense-date">{formatDate(expense.createdAt)}</p>
+      <div className={styles['expense-details']}>
+        <h4 className={styles['expense-title']}>{expense.title}</h4>
+        <p className={styles['expense-date']}>{formatDate(expense.createdAt)}</p>
       </div>
 
-      <div className="expense-amount">{CURRENCY_SYMBOLS[currency]}{expense.amount.toFixed(2)}</div>
+      <div className={styles['expense-amount']}>{CURRENCY_SYMBOLS[currency]}{expense.amount.toFixed(2)}</div>
 
       <button
-        className="btn-delete"
+        className={styles['btn-delete']}
         onClick={handleDelete}
         title="Удалить расход"
       >

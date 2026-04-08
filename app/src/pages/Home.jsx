@@ -3,7 +3,7 @@ import ExpenseForm from '../components/ExpenseForm';
 import ExpenseList from '../components/ExpenseList';
 import FilterBar from '../components/FilterBar';
 import Summary from '../components/Summary';
-import '../styles/Home.css';
+import styles from '../styles/Home.module.css';
 
 export default function Home({ theme, onToggleTheme }) {
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -11,20 +11,20 @@ export default function Home({ theme, onToggleTheme }) {
   const [currency, setCurrency] = useState('USD');
 
   return (
-    <div className="home">
-      <header className="app-header">
-        <div className="header-content">
+    <div className={styles.home}>
+      <header className={styles['app-header']}>
+        <div className={styles['header-content']}>
           <h1>💰 Трекер расходов</h1>
           <p>Отслеживайте свои расходы и управляйте бюджетом</p>
         </div>
-        <div className="header-controls">
-          <div className="currency-selector">
+        <div className={styles['header-controls']}>
+          <div className={styles['currency-selector']}>
             <label htmlFor="currency">Валюта:</label>
             <select 
               id="currency" 
               value={currency} 
               onChange={(e) => setCurrency(e.target.value)}
-              className="currency-select"
+              className={styles['currency-select']}
             >
               <option value="USD">USD ($)</option>
               <option value="RUB">RUB (₽)</option>
@@ -33,7 +33,7 @@ export default function Home({ theme, onToggleTheme }) {
             </select>
           </div>
           <button 
-            className="theme-toggle" 
+            className={styles['theme-toggle']} 
             onClick={onToggleTheme}
             title={`Переключить на ${theme === 'light' ? 'тёмную' : 'светлую'} тему`}
           >
@@ -42,10 +42,10 @@ export default function Home({ theme, onToggleTheme }) {
         </div>
       </header>
 
-      <main className="app-main">
-        <div className="container">
+      <main className={styles['app-main']}>
+        <div className={styles.container}>
           {/* Summary Statistics */}
-          <div className="section summary-section">
+          <div className={`${styles.section} ${styles['summary-section']}`}>
             <Summary
               selectedCategory={selectedCategory}
               selectedMonth={selectedMonth}
@@ -54,12 +54,12 @@ export default function Home({ theme, onToggleTheme }) {
           </div>
 
           {/* Add Expense Form */}
-          <div className="section form-section">
+          <div className={`${styles.section} ${styles['form-section']}`}>
             <ExpenseForm currency={currency} />
           </div>
 
           {/* Filters */}
-          <div className="section filter-section">
+          <div className={`${styles.section} ${styles['filter-section']}`}>
             <FilterBar
               selectedCategory={selectedCategory}
               onCategoryChange={setSelectedCategory}
@@ -69,7 +69,7 @@ export default function Home({ theme, onToggleTheme }) {
           </div>
 
           {/* Expense List */}
-          <div className="section list-section">
+          <div className={`${styles.section} ${styles['list-section']}`}>
             <ExpenseList
               selectedCategory={selectedCategory}
               selectedMonth={selectedMonth}
@@ -79,7 +79,7 @@ export default function Home({ theme, onToggleTheme }) {
         </div>
       </main>
 
-      <footer className="app-footer">
+      <footer className={styles['app-footer']}>
         <p>© 2026 Трекер расходов. Сделано с ❤️</p>
       </footer>
     </div>
