@@ -1,0 +1,285 @@
+.expense-item {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.5rem 1.5rem;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.9) 100%);
+  border-radius: 24px;
+  border-left: 6px solid;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: slideIn 0.5s ease-out;
+  cursor: default;
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(255, 255, 255, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+.expense-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg,
+    #667eea 0%,
+    #764ba2 25%,
+    #f093fb 50%,
+    #f5576c 75%,
+    #4facfe 100%);
+  border-radius: 24px 24px 0 0;
+}
+
+.expense-item::after {
+  content: '';
+  position: absolute;
+  top: -30%;
+  right: -30%;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(102, 126, 234, 0.06) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(20px);
+}
+
+.expense-item:hover {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.95) 100%);
+  box-shadow:
+    0 25px 50px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.9),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  transform: translateX(8px) scale(1.02);
+  border-color: rgba(102, 126, 234, 0.2);
+}
+
+.expense-item:hover::after {
+  transform: scale(1.2);
+}
+
+/* Expense Icon */
+.expense-icon {
+  font-size: 1.8rem;
+  min-width: 2.5rem;
+  text-align: center;
+  opacity: 0.9;
+  animation: scaleIn 0.5s ease-out;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.08) 100%);
+  border-radius: 16px;
+  padding: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(102, 126, 234, 0.15);
+  position: relative;
+  z-index: 2;
+}
+
+/* Expense Details */
+.expense-details {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.expense-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 0.25rem;
+  word-break: break-word;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.expense-title::before {
+  content: '📝';
+  font-size: 0.9rem;
+  opacity: 0.8;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.expense-date {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+}
+
+.expense-date::before {
+  content: '📅';
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+/* Expense Amount */
+.expense-amount {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #1e293b;
+  min-width: 80px;
+  text-align: right;
+  background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 2;
+}
+
+/* Delete Button */
+.btn-delete {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(220, 38, 38, 0.08) 100%);
+  color: #dc2626;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  border: 2px solid rgba(239, 68, 68, 0.2);
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.1);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-delete::before {
+  content: '🗑️';
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+.btn-delete:hover {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(220, 38, 38, 0.15) 100%);
+  border-color: rgba(239, 68, 68, 0.4);
+  transform: scale(1.15) rotate(5deg);
+  box-shadow: 0 8px 25px rgba(239, 68, 68, 0.2);
+  color: #b91c1c;
+}
+
+.btn-delete:active {
+  transform: scale(0.95) rotate(0deg);
+}
+
+/* Deletion Animation */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive Design - Tablet */
+@media (max-width: 768px) {
+  .expense-item {
+    padding: 0.9rem 1rem;
+    gap: 0.9rem;
+  }
+
+  .expense-icon {
+    font-size: 1.3rem;
+  }
+
+  .expense-title {
+    font-size: 0.95rem;
+  }
+
+  .expense-amount {
+    font-size: 1rem;
+    min-width: 65px;
+  }
+}
+
+/* Responsive Design - Mobile */
+@media (max-width: 480px) {
+  .expense-item {
+    padding: 0.75rem;
+    gap: 0.75rem;
+  }
+
+  .expense-icon {
+    font-size: 1.25rem;
+    min-width: 1.75rem;
+  }
+
+  .expense-title {
+    font-size: 0.9rem;
+  }
+
+  .expense-date {
+    font-size: 0.75rem;
+  }
+
+  .expense-amount {
+    font-size: 0.95rem;
+    min-width: 55px;
+  }
+
+  .btn-delete {
+    width: 28px;
+    height: 28px;
+    font-size: 0.95rem;
+  }
+}
+
+/* Extra Small Mobile */
+@media (max-width: 360px) {
+  .expense-item {
+    padding: 0.6rem;
+    gap: 0.6rem;
+  }
+
+  .expense-icon {
+    font-size: 1.1rem;
+  }
+
+  .expense-title {
+    font-size: 0.85rem;
+  }
+
+  .expense-amount {
+    font-size: 0.85rem;
+    min-width: 50px;
+  }
+}
