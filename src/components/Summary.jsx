@@ -1,11 +1,3 @@
-import { useEffect, useState } from 'react';
-import {
-  collection,
-  query,
-  orderBy,
-  onSnapshot,
-} from 'firebase/firestore';
-import { db } from '../firebase/firebase';
 import styles from '../styles/Summary.module.css';
 
 const CURRENCY_SYMBOLS = {
@@ -15,53 +7,10 @@ const CURRENCY_SYMBOLS = {
   TRY: '₺',
 };
 
-export default function Summary({ selectedCategory, selectedMonth, currency = 'USD' }) {
-  const [totalAmount, setTotalAmount] = useState(0);
-  const [filteredAmount, setFilteredAmount] = useState(0);
-  const [expenseCount, setExpenseCount] = useState(0);
-
-  useEffect(() => {
-    // Подписка на все расходы для расчета общей суммы
-    const q = query(collection(db, 'expenses'), orderBy('createdAt', 'desc'));
-
-    const unsubscribe = onSnapshot(q, (snapshot) => {
-      let allExpenses = [];
-      snapshot.forEach((doc) => {
-        allExpenses.push({
-          id: doc.id,
-          ...doc.data(),
-        });
-      });
-
-      // Общая сумма всех расходов
-      const total = allExpenses.reduce((sum, e) => sum + (e.amount || 0), 0);
-      setTotalAmount(total);
-
-      // Фильтрованная сумма
-      let filtered = allExpenses;
-
-      if (selectedCategory !== 'all') {
-        filtered = filtered.filter((e) => e.category === selectedCategory);
-      }
-
-      if (selectedMonth) {
-        const [year, month] = selectedMonth.split('-');
-        filtered = filtered.filter((e) => {
-          const date = e.createdAt?.toDate?.() || new Date(e.createdAt);
-          return (
-            date.getFullYear() === parseInt(year) &&
-            date.getMonth() === parseInt(month) - 1
-          );
-        });
-      }
-
-      const filteredSum = filtered.reduce((sum, e) => sum + (e.amount || 0), 0);
-      setFilteredAmount(filteredSum);
-      setExpenseCount(filtered.length);
-    });
-
-    return () => unsubscribe();
-  }, [selectedCategory, selectedMonth]);
+export default function Summary({ allExpenses = [], filteredExpenses = [], currency = 'USD' }) {
+  const totalAmount = allExpenses.reduce((sum, e) => sum + (e.amount || 0), 0);
+  const filteredAmount = filteredExpenses.reduce((sum, e) => sum + (e.amount || 0), 0);
+  const expenseCount = filteredExpenses.length;
 
   return (
     <div className={styles.summary}>
@@ -71,20 +20,13 @@ export default function Summary({ selectedCategory, selectedMonth, currency = 'U
       </div>
 
       <div className={`${styles['summary-card']} ${styles.filtered}`}>
-        <h3>
-          {selectedMonth
-            ? new Date(selectedMonth + '-01').toLocaleDateString('ru-RU', {
-                month: 'long',
-                year: 'numeric',
-              })
-            : 'Отфильтровано'}
-        </h3>
+        <h3>Фильтрованные</h3>
         <p className={styles.amount}>{CURRENCY_SYMBOLS[currency]}{filteredAmount.toFixed(2)}</p>
         <span className={styles.count}>{expenseCount} позиций</span>
       </div>
 
       <div className={`${styles['summary-card']} ${styles.average}`}>
-        <h3>Средняя стоимость</h3>
+        <h3>Средняя цена</h3>
         <p className={styles.amount}>
           {CURRENCY_SYMBOLS[currency]}{expenseCount > 0 ? (filteredAmount / expenseCount).toFixed(2) : '0.00'}
         </p>
