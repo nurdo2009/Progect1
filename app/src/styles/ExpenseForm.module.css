@@ -1,0 +1,257 @@
+.expense-form-container {
+  background-color: var(--bg-white);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  animation: slideDown 0.4s ease-out;
+  transition: var(--transition);
+}
+
+.expense-form-container h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-dark);
+  font-weight: 600;
+  animation: fadeInDown 0.4s ease-out;
+}
+
+.expense-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  animation: fadeInUp 0.5s ease-out backwards;
+}
+
+.form-group input,
+.form-group select {
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: var(--transition);
+  background-color: var(--bg-white);
+  color: var(--text-dark);
+}
+
+.form-group label {
+  font-weight: 500;
+  color: var(--text-dark);
+  font-size: 0.9rem;
+  text-transform: capitalize;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+}
+
+.form-group input:hover:not(:disabled),
+.form-group select:hover:not(:disabled) {
+  border-color: var(--primary-color);
+}
+
+/* Error Message */
+.error-message {
+  background-color: rgba(198, 40, 40, 0.1);
+  color: #c62828;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  border-left: 4px solid #c62828;
+  animation: shake 0.3s ease-in-out 0s, slideDown 0.3s ease-out;
+  transition: var(--transition);
+}
+
+/* Submit Button */
+.btn-submit {
+  background: linear-gradient(135deg, var(--primary-color) 0%, #1976D2 100%);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+  box-shadow: var(--shadow-sm);
+  animation: scaleIn 0.4s ease-out;
+}
+
+.btn-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-submit:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Animations */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+/* Responsive Grid - Desktop */
+@media (min-width: 768px) {
+  .expense-form {
+    grid-template-columns: 1fr 1fr 1fr auto;
+    align-items: flex-end;
+    gap: 1rem;
+  }
+
+  .form-group:last-child {
+    grid-column: span 1;
+  }
+
+  .btn-submit {
+    height: 40px;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .form-group {
+    animation-delay: 0.05s;
+  }
+
+  .form-group:nth-child(2) {
+    animation-delay: 0.1s;
+  }
+
+  .form-group:nth-child(3) {
+    animation-delay: 0.15s;
+  }
+
+  .form-group:nth-child(4) {
+    animation-delay: 0.2s;
+  }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .expense-form {
+    grid-template-columns: 1fr;
+  }
+
+  .expense-form-container {
+    padding: 1.25rem;
+  }
+
+  .btn-submit {
+    width: 100%;
+  }
+
+  .expense-form-container h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .expense-form {
+    gap: 0.75rem;
+  }
+
+  .expense-form-container {
+    padding: 1rem;
+  }
+
+  .expense-form-container h2 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .form-group {
+    gap: 0.4rem;
+  }
+
+  .form-group label {
+    font-size: 0.85rem;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 0.6rem;
+    font-size: 0.9rem;
+  }
+
+  .btn-submit {
+    font-size: 0.9rem;
+    padding: 0.65rem 1.25rem;
+  }
+}
+
+/* Extra Small Mobile */
+@media (max-width: 360px) {
+  .expense-form-container {
+    padding: 0.75rem;
+  }
+
+  .expense-form-container h2 {
+    font-size: 0.9rem;
+  }
+}
