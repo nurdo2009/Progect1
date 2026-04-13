@@ -9,7 +9,7 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, si
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "AIzaSyAN9BkIOagG8CTjcftvzf0CzBfWUp9ls-o",
-   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "treker-5d982.firebaseapp.com",
+     authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "treker-5d982.firebaseapp.com",
   projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "treker-5d982",
   storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "treker-5d982.firebasestorage.app",
   messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "1077070728653",

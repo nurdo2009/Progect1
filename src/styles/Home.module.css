@@ -685,6 +685,48 @@
   background-color: #0f172a;
 }
 
+.language-selector {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.language-btn {
+  background: rgba(255, 255, 255, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.36);
+  border-radius: 999px;
+  padding: 0.85rem 1.35rem;
+  color: rgba(255, 255, 255, 0.96);
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: var(--transition);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.08);
+}
+
+.language-btn:hover {
+  background: rgba(255, 255, 255, 0.36);
+  transform: translateY(-2px);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.12);
+}
+
+.language-btn:active {
+  transform: translateY(0);
+}
+
+:global([data-theme="dark"]) .language-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #f5f9ff;
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.22);
+}
+
+:global([data-theme="dark"]) .language-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.28);
+}
+
 :global([data-theme="dark"]) .page-button {
   background: rgba(255, 255, 255, 0.1);
   color: #e2e8f0;

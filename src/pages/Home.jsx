@@ -5,21 +5,9 @@ import ExpenseList from '../components/ExpenseList';
 import FilterBar from '../components/FilterBar';
 import Summary from '../components/Summary';
 import { registerWithEmail, loginWithEmail, logout as logoutUser, db } from '../firebase/firebase';
+import { useTranslations } from '../languages/translations';
 import logo from '../assets/Logo TR.png';
 import styles from '../styles/Home.module.css';
-
-const pages = [
-  { id: 'dashboard', label: 'Главная' },
-  { id: 'analytics', label: 'Аналитика' },
-  { id: 'features', label: 'Фишки' },
-  { id: 'goals', label: 'Цели' },
-  { id: 'reports', label: 'Отчёты' },
-  { id: 'budgets', label: 'Бюджет' },
-  { id: 'savings', label: 'Накопления' },
-  { id: 'receipts', label: 'Чеки' },
-  { id: 'notifications', label: 'Уведомления' },
-  { id: 'settings', label: 'Настройки' },
-];
 
 const CURRENCY_SYMBOLS = {
   USD: '$',
@@ -28,7 +16,22 @@ const CURRENCY_SYMBOLS = {
   TRY: '₺',
 };
 
-export default function Home({ theme, onToggleTheme }) {
+export default function Home({ theme, onToggleTheme, language = 'ru', onToggleLanguage }) {
+  const t = useTranslations(language);
+  
+  const pages = [
+    { id: 'dashboard', label: t.header.dashboard },
+    { id: 'analytics', label: t.header.analytics },
+    { id: 'features', label: t.header.features },
+    { id: 'goals', label: t.header.goals },
+    { id: 'reports', label: t.header.reports },
+    { id: 'budgets', label: t.header.budgets },
+    { id: 'savings', label: t.header.savings },
+    { id: 'receipts', label: t.header.receipts },
+    { id: 'notifications', label: t.header.notifications },
+    { id: 'settings', label: t.header.settings },
+  ];
+
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedMonth, setSelectedMonth] = useState('');
   const [currency, setCurrency] = useState(() => localStorage.getItem('currency') || 'USD');
@@ -527,6 +530,14 @@ export default function Home({ theme, onToggleTheme }) {
         </div>
 
         <div className={styles['header-tools']}>
+          <button
+            type="button"
+            className={styles['language-btn']}
+            onClick={onToggleLanguage}
+            title="Toggle Language"
+          >
+            {language === 'ru' ? '🇷🇺 РУ' : '🇬🇧 EN'}
+          </button>
           <button
             className={styles['theme-toggle']}
             onClick={onToggleTheme}
